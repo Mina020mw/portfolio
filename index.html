@@ -174,8 +174,15 @@ addEventListener("pageshow",e=>{if(e.persisted){v.currentTime=0;start()}});
 // To add a video: set id (Google Drive file ID) or yt (YouTube video ID); add ar:"16/9" for landscape videos.
 const CATS=["ADS","Media buying","Medical","Teaching","Programming","Events"];
 const WORKS=[];
-CATS.forEach(c=>{for(let i=1;i<=(c==="Events"?1:2);i++)WORKS.push({cat:c,title:"Video title "+i,id:""})});
+CATS.forEach(c=>{for(let i=1;i<=(c==="Events"||c==="ADS"?1:2);i++)WORKS.push({cat:c,title:"Video title "+i,id:""})});
 Object.assign(WORKS.find(w=>w.cat==="ADS"),{title:"Osaka Sushi",yt:"hsCpiAW-L7Y"});
+Object.assign(WORKS.find(w=>w.cat==="Media buying"),{title:"Roas Down",yt:"9BUtCngldQA"});
+Object.assign(WORKS.filter(w=>w.cat==="Media buying")[1],{title:"Black Friday",yt:"nIqD2iR7zr4"});
+Object.assign(WORKS.find(w=>w.cat==="Medical"),{title:"Age 50",yt:"JlD4SLN7TQU"});
+Object.assign(WORKS.filter(w=>w.cat==="Medical")[1],{title:"Bridge Problem",yt:"qDuuk8VcDyU"});
+WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Medical")+1,0,{cat:"Medical",title:"Anesthetic injection",yt:"HZtNGgdmfm8"});
+WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Medical")+1,0,{cat:"Medical",title:"Gummy Smile",yt:"gV0JR1KRRLk"});
+WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Medical")+1,0,{cat:"Medical",title:"Crossbite",yt:"DlPDx0sTyyc"});
 let active="All";
 const grid=document.getElementById("grid"),chips=document.getElementById("chips"),dlg=document.getElementById("dlg"),frm=document.getElementById("frm");
 function renderChips(){
