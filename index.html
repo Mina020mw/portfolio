@@ -106,6 +106,9 @@ html.lerp{scroll-behavior:auto}
 @media(prefers-reduced-motion:reduce){.it .in{animation:none}}
 .card.live::after{content:"";position:absolute;left:50%;top:42%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .card.live::before{content:"";position:absolute;left:50%;top:42%;margin:-10px 0 0 -6px;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;z-index:1}
+.card .th{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;-webkit-user-drag:none;user-select:none;pointer-events:none}
+.card .sh{position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(transparent 40%,rgba(8,9,18,.92))}
+.card small,.card strong,.card span{position:relative;z-index:1}
 @media(max-width:820px){html{font-size:15px}
 .tcp{font-size:.62rem;padding:4px 9px;right:max(10px,env(safe-area-inset-right,0px));bottom:max(10px,env(safe-area-inset-bottom,0px));opacity:.85}
 section{padding:56px 0}
@@ -183,6 +186,15 @@ Object.assign(WORKS.filter(w=>w.cat==="Medical")[1],{title:"Bridge Problem",yt:"
 WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Medical")+1,0,{cat:"Medical",title:"Anesthetic injection",yt:"HZtNGgdmfm8"});
 WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Medical")+1,0,{cat:"Medical",title:"Gummy Smile",yt:"gV0JR1KRRLk"});
 WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Medical")+1,0,{cat:"Medical",title:"Crossbite",yt:"DlPDx0sTyyc"});
+WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Medical")+1,0,{cat:"Medical",title:"Post-extraction pain",yt:"NvElHuRvlL0"});
+WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Medical")+1,0,{cat:"Medical",title:"After removing the braces",yt:"ylLM25sX6wQ"});
+WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Medical")+1,0,{cat:"Medical",title:"Immediate Dental Implants",yt:"lhH60OfWswM"});
+Object.assign(WORKS.filter(w=>w.cat==="Teaching")[0],{title:"Mr. Mrmr english",yt:"KotPCfyO8LY"});
+Object.assign(WORKS.filter(w=>w.cat==="Teaching")[1],{title:"Mr. Mohamed Basunny - Integrated Sciences",yt:"-o--MFN_MwE"});
+[["Mr. Mrmr english - exam","7SVul1Vel6U"],["Mr. Ali Khalil - Philosophy and Logic","GUyBlqO0KR4"],["Mr. Mohammed Al-Zuhairi - history","fCue-zWVWXo"]].forEach(a=>WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Teaching")+1,0,{cat:"Teaching",title:a[0],yt:a[1]}));
+Object.assign(WORKS.filter(w=>w.cat==="Programming")[0],{title:"User Problem",yt:"JlQO_G_DHXM"});
+Object.assign(WORKS.filter(w=>w.cat==="Programming")[1],{title:"? company was hacked because of a tool",yt:"ODUJN8ZMoDo"});
+[["British Airways","ADrx7zLekVs"],["? JavaScript programmer","5Ua8V1ye9go"],["Cybersecurity mistakes 5","x0RBMz5nSAA"],["web cache poisoning","RhzqxK2f49M"],["programmer developed a system for a bank","bt80FQzQMRs"]].forEach(a=>WORKS.splice(WORKS.map(w=>w.cat).lastIndexOf("Programming")+1,0,{cat:"Programming",title:a[0],yt:a[1]}));
 let active="All";
 const grid=document.getElementById("grid"),chips=document.getElementById("chips"),dlg=document.getElementById("dlg"),frm=document.getElementById("frm");
 function renderChips(){
@@ -201,6 +213,7 @@ items.forEach((w,ix)=>{const b=document.createElement("button");b.className="car
 b.innerHTML="<small></small><strong></strong><span></span>";
 b.children[0].textContent=w.cat;b.children[1].textContent=w.title;b.children[2].textContent=w.id||w.yt?"Watch":"Video coming soon";
 b.style.setProperty("--fd",(-ix*1.3)+"s");
+if(w.yt){const im=document.createElement("img"),u="https://i.ytimg.com/vi/"+w.yt+"/",L=["maxresdefault.jpg","hqdefault.jpg"];let k=0;im.className="th";im.alt="";im.loading="lazy";im.decoding="async";im.draggable=false;im.onerror=()=>{if(++k<L.length)im.src=u+L[k];else im.remove()};im.src=u+L[0];const sh=document.createElement("i");sh.className="sh";b.prepend(sh);b.prepend(im)}
 b.onclick=()=>{if(moved>6)return;if(ix!==idx){go(ix);return}const u=w.yt?"https://www.youtube-nocookie.com/embed/"+w.yt+"?autoplay=1&rel=0&playsinline=1":w.id?"https://drive.google.com/file/d/"+w.id+"/preview":"";if(u){const wd=w.ar==="16/9";dlg.style.width=wd?"min(92vw,860px)":"";frm.style.aspectRatio=wd?"16/9":"";frm.src=u;dlg.showModal()}};
 grid.appendChild(b)});
 dots();layout()}
